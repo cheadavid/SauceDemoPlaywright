@@ -10,14 +10,14 @@ const validUsers = [
 
 test.describe('Login', () => {
   for (const username of validUsers) {
-    test(`connexion réussie - ${username}`, async ({ loginPage, inventoryPage }) => {
+    test(`Connexion réussie - ${username}`, async ({ loginPage, inventoryPage }) => {
       await loginPage.login(username, 'secret_sauce');
 
       await inventoryPage.waitForPageLoad();
     });
   }
 
-  test('connexion échouée avec mauvais mot de passe', async ({ loginPage }) => {
+  test('Connexion échouée avec mauvais mot de passe', async ({ loginPage }) => {
     await loginPage.login('standard_user', 'wrong_password');
 
     const isError = await loginPage.isErrorDisplayed();
