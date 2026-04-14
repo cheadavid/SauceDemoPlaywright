@@ -10,6 +10,7 @@ export default defineConfig(
     reporter: 'html',
     use: {
       baseURL: 'https://www.saucedemo.com',
+      testIdAttribute: 'data-test',
       trace: 'on-first-retry',
     },
     projects: [
