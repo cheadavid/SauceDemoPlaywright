@@ -10,10 +10,10 @@ const validUsers = [
 
 test.describe('Login', () => {
   for (const username of validUsers) {
-    test(`connexion réussie - ${username}`, async ({ loginPage, page }) => {
+    test(`connexion réussie - ${username}`, async ({ loginPage, inventoryPage }) => {
       await loginPage.login(username, 'secret_sauce');
 
-      await expect(page).toHaveURL(/inventory/);
+      await inventoryPage.waitForPageLoad();
     });
   }
 

@@ -16,6 +16,10 @@ export class CheckoutStepTwoPage extends BasePage {
 
   // Actions
 
+  async waitForPageLoad(): Promise<void> {
+    await this.waitForUrl('/checkout-step-two.html');
+  }
+
   async clickFinish(): Promise<void> {
     await this.finishButton.click();
   }

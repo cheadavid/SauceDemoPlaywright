@@ -10,4 +10,10 @@ export class BasePage {
   constructor(page: Page) {
     this.page = page;
   }
+
+  // Actions
+
+  async waitForUrl(path: string): Promise<void> {
+    await this.page.waitForURL(`**${path}`);
+  }
 }

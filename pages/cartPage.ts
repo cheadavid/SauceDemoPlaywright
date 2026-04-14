@@ -16,6 +16,10 @@ export class CartPage extends BasePage {
 
   // Actions
 
+  async waitForPageLoad(): Promise<void> {
+    await this.waitForUrl('/cart.html');
+  }
+
   async clickCheckout(): Promise<void> {
     await this.checkoutButton.click();
   }

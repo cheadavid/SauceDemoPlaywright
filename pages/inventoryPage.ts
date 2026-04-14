@@ -18,6 +18,10 @@ export class InventoryPage extends BasePage {
 
   // Actions
 
+  async waitForPageLoad(): Promise<void> {
+    await this.waitForUrl('/inventory.html');
+  }
+
   async addProductToCart(productName: string): Promise<void> {
     const testId = `add-to-cart-${productName.toLowerCase().replace(/\s+/g, '-')}`;
 

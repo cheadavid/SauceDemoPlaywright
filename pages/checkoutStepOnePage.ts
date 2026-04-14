@@ -22,6 +22,10 @@ export class CheckoutStepOnePage extends BasePage {
 
   // Actions
 
+  async waitForPageLoad(): Promise<void> {
+    await this.waitForUrl('/checkout-step-one.html');
+  }
+
   async fillShippingInfo(firstName: string, lastName: string, zipCode: string): Promise<void> {
     await this.firstNameInput.fill(firstName);
     await this.lastNameInput.fill(lastName);
