@@ -6,6 +6,8 @@ export class InventoryPage extends BasePage {
 
   private readonly cartLink: Locator;
   private readonly cartBadge: Locator;
+  private readonly sortSelect: Locator;
+  private readonly productPrices: Locator;
 
   // Constructor
 
@@ -14,6 +16,8 @@ export class InventoryPage extends BasePage {
 
     this.cartLink = this.page.getByTestId('shopping-cart-link');
     this.cartBadge = this.page.getByTestId('shopping-cart-badge');
+    this.sortSelect = this.page.getByTestId('product-sort-container');
+    this.productPrices = this.page.locator('.inventory_item_price');
   }
 
   // Actions
@@ -30,6 +34,22 @@ export class InventoryPage extends BasePage {
 
   async clickCart(): Promise<void> {
     await this.cartLink.click();
+  }
+
+  async sortByPriceAscending(): Promise<void> {
+    await this.sortSelect.selectOption('lohi');
+  }
+
+  async sortByPriceDescending(): Promise<void> {
+    await this.sortSelect.selectOption('hilo');
+  }
+
+  // Getters
+
+  async getProductPrices(): Promise<number[]> {
+    const prices = await this.productPrices.allTextContents();
+
+    return prices.map(price => Number(price.replace('$', '')));
   }
 
   // Assertions
