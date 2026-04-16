@@ -1,35 +1,19 @@
-import { test, expect } from '../fixtures';
+import { test, expect } from '../fixtures/authenticated';
 
-test.describe('Inventory Sort', () => {
-  test.beforeEach(async ({ loginPage, inventoryPage }) => {
-    await loginPage.login('standard_user', 'secret_sauce');
+test('Vérifier le tri des prix en ordre croissant', async ({ inventoryPage }) => {
+  await inventoryPage.sortByPriceAscending();
 
-    await inventoryPage.waitForPageLoad();
-  });
+  const prices = await inventoryPage.getProductPrices();
+  const sortedPrices = [...prices].sort((a, b) => a - b);
 
-  test('Vérifier le tri des prix en ordre croissant', async ({ inventoryPage }) => {
-    await test.step('Choisir le tri croissant', async () => {
-      await inventoryPage.sortByPriceAscending();
-    });
+  expect(prices).toEqual(sortedPrices);
+});
 
-    await test.step('Vérifier que les prix sont triés du plus petit au plus grand', async () => {
-      const prices = await inventoryPage.getProductPrices();
-      const sortedPrices = [...prices].sort((a, b) => a - b);
+test('Vérifier le tri des prix en ordre décroissant', async ({ inventoryPage }) => {
+  await inventoryPage.sortByPriceDescending();
 
-      expect(prices).toEqual(sortedPrices);
-    });
-  });
+  const prices = await inventoryPage.getProductPrices();
+  const sortedPrices = [...prices].sort((a, b) => b - a);
 
-  test('Vérifier le tri des prix en ordre décroissant', async ({ inventoryPage }) => {
-    await test.step('Choisir le tri décroissant', async () => {
-      await inventoryPage.sortByPriceDescending();
-    });
-
-    await test.step('Vérifier que les prix sont triés du plus grand au plus petit', async () => {
-      const prices = await inventoryPage.getProductPrices();
-      const sortedPrices = [...prices].sort((a, b) => b - a);
-
-      expect(prices).toEqual(sortedPrices);
-    });
-  });
+  expect(prices).toEqual(sortedPrices);
 });

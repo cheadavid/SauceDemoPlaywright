@@ -13,7 +13,6 @@ type AppFixtures = {
 export const test = base.extend<AppFixtures>({
   loginPage: async ({ page }, use) => {
     await page.goto('/');
-
     await use(new LoginPage(page));
   },
 
